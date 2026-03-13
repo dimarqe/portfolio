@@ -12,7 +12,7 @@ export default function About() {
         <SectionHeading
           label="About"
           title="About Me"
-          subtitle="A little background on who I am and how I work."
+          subtitle=""
         />
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
@@ -27,9 +27,7 @@ export default function About() {
               {personal.bio}
             </motion.p>
             <motion.p variants={slideInLeft} className="text-muted leading-relaxed">
-              I enjoy working at the intersection of backend reliability and clean frontend experience.
-              Whether it's architecting a serverless API on AWS or building a responsive UI in React,
-              I bring the same attention to detail and commitment to quality.
+
             </motion.p>
           </motion.div>
 

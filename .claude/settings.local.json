@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.negrilmuaythaigym.com)",
+      "Bash(cd \"C:/Users/dimit/Desktop/Projects/portfolio\" && npm run build 2>&1)",
+      "WebFetch(domain:jewelsandtime-production.up.railway.app)",
+      "WebFetch(domain:e-commerce-headless-cms-frontend-production.up.railway.app)",
+      "Bash(npx playwright:*)"
+    ]
+  }
+}

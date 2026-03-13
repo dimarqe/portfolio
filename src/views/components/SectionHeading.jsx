@@ -13,21 +13,22 @@ export default function SectionHeading({ label, title, subtitle }) {
       {label && (
         <motion.p
           variants={fadeInUp}
-          className="font-mono text-accent text-xs tracking-[0.25em] uppercase mb-3"
+          className="flex items-center gap-2 font-mono text-xs text-accent tracking-[0.25em] uppercase mb-4"
         >
-          / {label}
+          <span className="w-5 h-px bg-accent inline-block" />
+          {label}
         </motion.p>
       )}
       <motion.h2
         variants={fadeInUp}
-        className="font-display font-bold text-3xl lg:text-4xl text-primary"
+        className="font-display font-bold text-4xl lg:text-5xl bg-gradient-to-r from-primary via-primary to-accent/70 bg-clip-text text-transparent"
       >
         {title}
       </motion.h2>
       {subtitle && (
         <motion.p
           variants={fadeInUp}
-          className="text-muted mt-3 max-w-xl leading-relaxed"
+          className="text-muted mt-4 max-w-xl leading-relaxed"
         >
           {subtitle}
         </motion.p>

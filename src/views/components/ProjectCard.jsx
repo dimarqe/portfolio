@@ -3,15 +3,14 @@ import { motion } from 'framer-motion'
 import { fadeInUp } from '../../controllers/animations'
 import { ExternalLinkIcon } from './Icons'
 
-function ProjectPreview({ image, title }) {
+function ProjectPreview({ image, title, link }) {
   const [status, setStatus] = useState(image ? 'loading' : 'placeholder')
 
   return (
-    <div className="relative overflow-hidden rounded-lg border border-border bg-surface mb-5 aspect-video">
-      {/* Placeholder — shown when no image is provided yet */}
+    <div className="relative overflow-hidden rounded-lg border border-border bg-surface mb-5 aspect-video group/preview">
+      {/* Placeholder */}
       {status === 'placeholder' && (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-surface-2">
-          {/* Browser chrome mockup */}
           <div className="w-full px-4 absolute top-0 left-0">
             <div className="flex items-center gap-1.5 py-2 border-b border-border">
               <div className="w-2 h-2 rounded-full bg-border-2" />
@@ -30,7 +29,7 @@ function ProjectPreview({ image, title }) {
         <div className="absolute inset-0 bg-surface-2 animate-pulse" />
       )}
 
-      {/* Error fallback */}
+      {/* Error */}
       {status === 'error' && (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 bg-surface-2">
           <div className="w-full px-4 absolute top-0 left-0">
@@ -49,17 +48,26 @@ function ProjectPreview({ image, title }) {
         <img
           src={image}
           alt={`Preview of ${title}`}
-          className={`w-full h-full object-cover object-top transition-opacity duration-500 ${
-            status === 'loaded' ? 'opacity-100' : 'opacity-0'
+          className={`w-full h-full object-cover object-top transition-all duration-500 ${
+            status === 'loaded' ? 'opacity-100 group-hover/preview:scale-105' : 'opacity-0'
           }`}
           onLoad={() => setStatus('loaded')}
           onError={() => setStatus('error')}
         />
       )}
 
-      {/* Bottom gradient overlay */}
-      {status === 'loaded' && (
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bg/20 pointer-events-none" />
+      {/* Hover overlay */}
+      {status === 'loaded' && link && (
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute inset-0 flex items-center justify-center bg-bg/70 opacity-0 group-hover/preview:opacity-100 transition-opacity duration-300 backdrop-blur-sm"
+        >
+          <span className="flex items-center gap-2 px-4 py-2 rounded-lg border border-accent/40 bg-surface/80 font-mono text-sm text-accent">
+            Visit Site <ExternalLinkIcon className="w-3.5 h-3.5" />
+          </span>
+        </a>
       )}
     </div>
   )
@@ -87,7 +95,7 @@ export default function ProjectCard({ project }) {
       className="group relative flex flex-col p-5 rounded-xl border border-border bg-surface-2/50 card-hover"
     >
       {/* Page preview */}
-      <ProjectPreview image={project.image} title={project.title} />
+      <ProjectPreview image={project.image} title={project.title} link={project.link} />
 
       {/* Live badge */}
       {project.live && (

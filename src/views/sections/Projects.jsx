@@ -11,7 +11,7 @@ export default function Projects() {
         <SectionHeading
           label="Projects"
           title="Projects"
-          subtitle="Real work I've designed, built, and shipped."
+          subtitle=""
         />
 
         <motion.div

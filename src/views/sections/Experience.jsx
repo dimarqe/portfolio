@@ -11,7 +11,7 @@ export default function Experience() {
         <SectionHeading
           label="Experience"
           title="Work Experience"
-          subtitle="Where I've worked and what I've built."
+          subtitle=""
         />
 
         <div className="max-w-3xl">

@@ -11,7 +11,7 @@ export default function Skills() {
         <SectionHeading
           label="Skills"
           title="Technical Skills"
-          subtitle="Technologies and tools I work with across the full stack."
+          subtitle=""
         />
 
         <motion.div
@@ -25,14 +25,18 @@ export default function Skills() {
             <motion.div
               key={group.category}
               variants={fadeInUp}
-              className="p-5 rounded-xl border border-border bg-surface-2/40 hover:border-border-2 transition-colors duration-300"
+              className="p-5 rounded-xl bg-surface-2/40 border border-border transition-colors duration-300 hover:border-border-2"
+              style={{ borderTop: `2px solid ${group.color}55` }}
             >
-              <p className="font-mono text-xs text-accent tracking-[0.2em] uppercase mb-4">
+              <p
+                className="font-mono text-xs tracking-[0.2em] uppercase mb-4"
+                style={{ color: group.color }}
+              >
                 {group.category}
               </p>
               <div className="flex flex-wrap gap-2">
                 {group.skills.map(skill => (
-                  <SkillBadge key={skill} skill={skill} />
+                  <SkillBadge key={skill} skill={skill} color={group.color} />
                 ))}
               </div>
             </motion.div>

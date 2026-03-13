@@ -8,15 +8,14 @@ function CodeSnippet() {
   return (
     <motion.div variants={slideInRight} className="relative hidden lg:block">
       {/* Ambient glow */}
-      <div className="absolute -inset-6 bg-accent/4 rounded-3xl blur-3xl pointer-events-none" />
+      <div className="absolute -inset-4 bg-gradient-to-br from-accent/8 to-accent-2/8 rounded-2xl blur-2xl pointer-events-none" />
 
-      {/* Floating animation wrapper */}
       <motion.div
         animate={{ y: [0, -10, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-        className="relative"
+        className="relative gradient-border"
       >
-        <div className="bg-surface-2 border border-border-2 rounded-xl overflow-hidden shadow-2xl shadow-black/60">
+        <div className="bg-surface-2 rounded-xl overflow-hidden shadow-2xl shadow-black/70">
           {/* Window chrome */}
           <div className="flex items-center gap-2 px-4 py-3 bg-surface border-b border-border">
             <div className="w-3 h-3 rounded-full bg-red-500/50" />
@@ -56,13 +55,18 @@ function CodeSnippet() {
               <span className="text-muted-2">,</span>
             </div>
             <div className="ml-10">
+              <span className="text-green-400">"JavaScript"</span>
+              <span className="text-muted-2">, </span>
               <span className="text-green-400">"React"</span>
               <span className="text-muted-2">, </span>
               <span className="text-green-400">"AWS"</span>
-              <span className="text-muted-2">,</span>
             </div>
             <div className="ml-10">
-              <span className="text-green-400">"Express.js"</span>
+              <span className="text-green-400">"PHP"</span>
+              <span className="text-muted-2">, </span>
+              <span className="text-green-400">"Laravel"</span>
+              <span className="text-muted-2">, </span>
+              <span className="text-green-400">"Flutter"</span>
             </div>
             <div className="ml-5">
               <span className="text-muted-2">],</span>
@@ -71,20 +75,14 @@ function CodeSnippet() {
               <span className="text-primary">experience</span>
               <span className="text-muted-2">: </span>
               <span className="text-orange-400">4</span>
-              <span className="text-muted-2">, </span>
-              <span className="text-muted">// years</span>
+              <span className="text-muted">, // years</span>
             </div>
             <div className="ml-5">
               <span className="text-primary">available</span>
               <span className="text-muted-2">: </span>
               <span className="text-accent-2">true</span>
             </div>
-            <div>
-              <span className="text-primary">{'}'}</span>
-            </div>
-            <div className="mt-2 text-muted">
-              {'// building reliable systems'}
-            </div>
+            <div><span className="text-primary">{'}'}</span></div>
           </div>
         </div>
       </motion.div>
@@ -96,10 +94,12 @@ export default function Hero() {
   return (
     <section id="hero" className="relative min-h-screen flex items-center">
       {/* Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 dot-grid opacity-60" />
-        <div className="absolute -top-40 -right-40 w-[700px] h-[700px] bg-accent/4 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 -left-60 w-[500px] h-[500px] bg-accent-2/4 rounded-full blur-3xl" />
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 dot-grid opacity-50" />
+        {/* Large glow blobs */}
+        <div className="absolute -top-60 -right-60 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 -left-60 w-[600px] h-[600px] bg-accent-2/5 rounded-full blur-[120px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-accent/3 rounded-full blur-[100px]" />
       </div>
 
       <div className="relative w-full max-w-7xl mx-auto px-6 lg:px-8 pt-28 pb-20">
@@ -120,17 +120,16 @@ export default function Hero() {
             </motion.div>
 
             {/* Pre-label */}
-            <motion.p variants={fadeInUp} className="font-body text-muted text-lg mb-1">
+            <motion.p variants={fadeInUp} className="font-body text-muted text-lg mb-2">
               Hi, I'm
             </motion.p>
 
-            {/* Name */}
-            <motion.h1
-              variants={fadeInUp}
-              className="font-display font-extrabold leading-none mb-4"
-            >
-              <span className="block text-6xl lg:text-7xl xl:text-8xl text-primary">Dimitri</span>
-              <span className="block text-6xl lg:text-7xl xl:text-8xl bg-gradient-to-r from-accent to-accent-2 bg-clip-text text-transparent">
+            {/* Name — ghost first, vibrant last */}
+            <motion.h1 variants={fadeInUp} className="font-display font-extrabold leading-[0.9] mb-5">
+              <span className="block text-[4.5rem] lg:text-[6rem] xl:text-[7rem] text-ghost tracking-tight">
+                Dimitri
+              </span>
+              <span className="inline-block text-[4.5rem] lg:text-[6rem] xl:text-[7rem] bg-gradient-to-r from-accent via-accent-2 to-accent bg-clip-text text-transparent tracking-tight pr-3">
                 Russell
               </span>
             </motion.h1>
@@ -140,10 +139,10 @@ export default function Hero() {
               {'<'} Full-Stack Software Developer {' />'}
             </motion.p>
 
-            {/* Bio excerpt */}
+            {/* Bio */}
             <motion.p variants={fadeInUp} className="text-muted leading-relaxed max-w-lg mb-8">
-              Building scalable backend systems and intuitive interfaces — from Java microservices
-              to React front-ends — across 4+ years of professional experience.
+              Building scalable backend systems and intuitive interfaces — from microservices
+              to enterprise systems — across 4+ years of professional experience.
             </motion.p>
 
             {/* CTAs */}
@@ -154,7 +153,7 @@ export default function Hero() {
               <Button href="#contact" variant="ghost">
                 Get In Touch
               </Button>
-<Button href={personal.resumeUrl} variant="muted" external>
+              <Button href={personal.resumeUrl} variant="muted" external>
                 <DownloadIcon className="w-3.5 h-3.5" />
                 Resume
               </Button>
