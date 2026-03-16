@@ -1,36 +1,38 @@
-import { motion } from 'framer-motion'
-import { fadeInUp } from '../../controllers/animations'
-
 export default function ExperienceCard({ experience }) {
   return (
-    <motion.div
-      variants={fadeInUp}
-      className="relative pl-10 pb-12 last:pb-0"
-    >
-      {/* Timeline dot */}
-      <div className="absolute left-0 top-1.5 w-4 h-4 rounded-full border-2 border-accent bg-bg shadow-[0_0_14px_rgba(34,211,238,0.5)]" />
+    <div className="group relative grid sm:grid-cols-[7rem_1fr] gap-3 sm:gap-6 p-4 rounded-lg transition-all duration-300 hover:bg-surface/60 hover:shadow-lg -mx-4">
+      {/* Date */}
+      <p className="font-mono text-xs text-muted-2 pt-1 shrink-0">
+        {experience.startDate} — {experience.endDate}
+      </p>
 
-      {/* Card */}
-      <div className="p-5 rounded-xl border border-border border-l-2 bg-surface-2/40 hover:border-border-2 transition-colors duration-300"
-        style={{ borderLeftColor: 'rgba(34,211,238,0.4)' }}
-      >
-        <div className="flex flex-wrap items-start justify-between gap-3">
-          <div>
-            <h3 className="font-display font-bold text-lg bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent leading-tight">
-              {experience.role}
-            </h3>
-            <div className="flex flex-wrap items-center gap-2 mt-1.5">
-              <span className="text-accent font-semibold text-sm">{experience.company}</span>
-              <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-accent/8 border border-accent/15 font-mono text-xs text-accent/70">
-                {experience.type}
+      {/* Content */}
+      <div>
+        <h3 className="font-semibold text-primary group-hover:text-accent transition-colors duration-200 leading-tight mb-0.5">
+          {experience.role}
+        </h3>
+        <p className="text-sm text-muted mb-3">
+          {experience.company}
+          <span className="ml-2 text-xs font-mono text-muted-2">· {experience.type}</span>
+        </p>
+
+        <p className="text-sm text-muted leading-relaxed mb-4">
+          {experience.description}
+        </p>
+
+        {experience.tech?.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {experience.tech.map(t => (
+              <span
+                key={t}
+                className="px-2.5 py-1 rounded font-mono text-xs bg-accent/10 text-accent border border-accent/20"
+              >
+                {t}
               </span>
-            </div>
+            ))}
           </div>
-          <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-surface border border-border font-mono text-xs text-muted shrink-0">
-            {experience.startDate} – {experience.endDate}
-          </span>
-        </div>
+        )}
       </div>
-    </motion.div>
+    </div>
   )
 }

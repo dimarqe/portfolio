@@ -1,37 +1,16 @@
-import { motion } from 'framer-motion'
 import { experiences } from '../../models/experience'
-import { staggerContainer } from '../../controllers/animations'
 import SectionHeading from '../components/SectionHeading'
 import ExperienceCard from '../components/ExperienceCard'
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 lg:py-32 bg-surface/30">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <SectionHeading
-          label="Experience"
-          title="Work Experience"
-          subtitle=""
-        />
+    <section id="experience" className="px-6 pb-24">
+      <SectionHeading title="Experience" />
 
-        <div className="max-w-3xl">
-          {/* Timeline container */}
-          <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-[7px] top-4 bottom-0 w-px bg-gradient-to-b from-accent via-border to-transparent" />
-
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
-            >
-              {experiences.map((exp, index) => (
-                <ExperienceCard key={exp.id} experience={exp} index={index} />
-              ))}
-            </motion.div>
-          </div>
-        </div>
+      <div className="space-y-2 max-w-2xl">
+        {experiences.map(exp => (
+          <ExperienceCard key={exp.id} experience={exp} />
+        ))}
       </div>
     </section>
   )

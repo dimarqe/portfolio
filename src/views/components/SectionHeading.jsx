@@ -1,38 +1,9 @@
-import { motion } from 'framer-motion'
-import { fadeInUp, staggerContainer } from '../../controllers/animations'
-
-export default function SectionHeading({ label, title, subtitle }) {
+export default function SectionHeading({ title }) {
   return (
-    <motion.div
-      variants={staggerContainer}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: '-80px' }}
-      className="mb-16"
-    >
-      {label && (
-        <motion.p
-          variants={fadeInUp}
-          className="flex items-center gap-2 font-mono text-xs text-accent tracking-[0.25em] uppercase mb-4"
-        >
-          <span className="w-5 h-px bg-accent inline-block" />
-          {label}
-        </motion.p>
-      )}
-      <motion.h2
-        variants={fadeInUp}
-        className="font-display font-bold text-4xl lg:text-5xl bg-gradient-to-r from-primary via-primary to-accent/70 bg-clip-text text-transparent"
-      >
+    <div className="sticky top-0 z-10 -mx-6 mb-10 px-6 py-4 backdrop-blur bg-bg/90 lg:relative lg:top-auto lg:mx-0 lg:bg-transparent lg:backdrop-blur-none lg:px-0 lg:py-0 lg:mb-12">
+      <h2 className="text-xs font-bold tracking-widest uppercase text-primary lg:sr-only">
         {title}
-      </motion.h2>
-      {subtitle && (
-        <motion.p
-          variants={fadeInUp}
-          className="text-muted mt-4 max-w-xl leading-relaxed"
-        >
-          {subtitle}
-        </motion.p>
-      )}
-    </motion.div>
+      </h2>
+    </div>
   )
 }

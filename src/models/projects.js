@@ -9,7 +9,7 @@ export const projects = [
     title: 'Negril Muay Thai Gym',
     description:
       'Full website for a Muay Thai training gym based in Negril, Jamaica. Covers class information, trainer profiles, and a contact section for prospective members — helping the gym establish its online presence and connect with the local community.',
-    tech: ['React.js', 'CSS'],
+    tech: ['React.js', 'PostgreSQL'],
     link: 'https://www.negrilmuaythaigym.com',
     image: `${import.meta.env.BASE_URL}images/projects/negril-muay-thai.png`,
     live: true,
@@ -20,7 +20,7 @@ export const projects = [
     title: 'D&D Platform',
     description:
       'Multi-role logistics and container management platform for international shipping operations. Features shipment tracking with milestone progression, EDI file imports, payment verification, exemption requests, and a full client portal — serving agents, consignees, and administrators.',
-    tech: ['Laravel', 'PHP', 'Ziggy.js'],
+    tech: ['Laravel', 'PHP', 'PostgreSQL'],
     link: 'https://dnd-sandbox.laravel.cloud/',
     image: `${import.meta.env.BASE_URL}images/projects/dnd-platform.png`,
     live: true,
@@ -31,7 +31,7 @@ export const projects = [
     title: 'Jewels & Time',
     description:
       "E-commerce platform for Jamaica's premier duty-free luxury jewelry retailer. Built to provide an elegant shopping experience for tourists and locals browsing high-end timepieces and jewelry.",
-    tech: ['Laravel', 'PHP'],
+    tech: ['Laravel', 'PHP', 'PostgreSQL'],
     link: 'https://jewelsandtime-production.up.railway.app/',
     image: `${import.meta.env.BASE_URL}images/projects/jewels-and-time.png`,
     live: true,

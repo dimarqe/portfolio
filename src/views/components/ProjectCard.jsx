@@ -1,72 +1,38 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { fadeInUp } from '../../controllers/animations'
 import { ExternalLinkIcon } from './Icons'
 
-function ProjectPreview({ image, title, link }) {
+function ProjectImage({ image, title, link }) {
   const [status, setStatus] = useState(image ? 'loading' : 'placeholder')
 
   return (
-    <div className="relative overflow-hidden rounded-lg border border-border bg-surface mb-5 aspect-video group/preview">
-      {/* Placeholder */}
-      {status === 'placeholder' && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-surface-2">
-          <div className="w-full px-4 absolute top-0 left-0">
-            <div className="flex items-center gap-1.5 py-2 border-b border-border">
-              <div className="w-2 h-2 rounded-full bg-border-2" />
-              <div className="w-2 h-2 rounded-full bg-border-2" />
-              <div className="w-2 h-2 rounded-full bg-border-2" />
-              <div className="ml-2 flex-1 h-3 rounded-sm bg-border max-w-[120px]" />
-            </div>
-          </div>
-          <span className="font-mono text-xs text-muted-2 mt-4">add screenshot to</span>
-          <span className="font-mono text-xs text-muted">public/images/projects/</span>
+    <div className="relative overflow-hidden rounded border border-border/50 aspect-video shrink-0 w-full sm:w-36 lg:w-44 group/img">
+      {(status === 'placeholder' || status === 'error') && (
+        <div className="absolute inset-0 bg-surface flex items-center justify-center">
+          <span className="font-mono text-xs text-muted-2">no preview</span>
         </div>
       )}
-
-      {/* Loading skeleton */}
       {status === 'loading' && (
-        <div className="absolute inset-0 bg-surface-2 animate-pulse" />
+        <div className="absolute inset-0 bg-surface animate-pulse" />
       )}
-
-      {/* Error */}
-      {status === 'error' && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 bg-surface-2">
-          <div className="w-full px-4 absolute top-0 left-0">
-            <div className="flex items-center gap-1.5 py-2 border-b border-border">
-              <div className="w-2 h-2 rounded-full bg-border-2" />
-              <div className="w-2 h-2 rounded-full bg-border-2" />
-              <div className="w-2 h-2 rounded-full bg-border-2" />
-            </div>
-          </div>
-          <span className="font-mono text-xs text-muted-2">image not found</span>
-        </div>
-      )}
-
-      {/* Screenshot */}
       {image && (
         <img
           src={image}
           alt={`Preview of ${title}`}
-          className={`w-full h-full object-cover object-top transition-all duration-500 ${
-            status === 'loaded' ? 'opacity-100 group-hover/preview:scale-105' : 'opacity-0'
+          className={`w-full h-full object-cover object-top transition-all duration-500 group-hover/img:scale-105 ${
+            status === 'loaded' ? 'opacity-100' : 'opacity-0'
           }`}
           onLoad={() => setStatus('loaded')}
           onError={() => setStatus('error')}
         />
       )}
-
-      {/* Hover overlay */}
       {status === 'loaded' && link && (
         <a
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute inset-0 flex items-center justify-center bg-bg/70 opacity-0 group-hover/preview:opacity-100 transition-opacity duration-300 backdrop-blur-sm"
+          className="absolute inset-0 bg-bg/60 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center"
         >
-          <span className="flex items-center gap-2 px-4 py-2 rounded-lg border border-accent/40 bg-surface/80 font-mono text-sm text-accent">
-            Visit Site <ExternalLinkIcon className="w-3.5 h-3.5" />
-          </span>
+          <ExternalLinkIcon className="w-5 h-5 text-accent" />
         </a>
       )}
     </div>
@@ -74,73 +40,56 @@ function ProjectPreview({ image, title, link }) {
 }
 
 export default function ProjectCard({ project }) {
-  if (project.placeholder) {
-    return (
-      <motion.div
-        variants={fadeInUp}
-        className="relative flex flex-col items-center justify-center p-8 rounded-xl border border-border bg-surface-2/30 min-h-[260px] opacity-40"
-      >
-        <div className="w-10 h-10 rounded-full border border-border-2 flex items-center justify-center mb-4">
-          <span className="text-muted font-mono text-lg">+</span>
-        </div>
-        <p className="font-display font-semibold text-muted text-lg">Coming Soon</p>
-        <p className="text-muted-2 text-sm mt-2 text-center">More projects on the way</p>
-      </motion.div>
-    )
-  }
-
   return (
-    <motion.div
-      variants={fadeInUp}
-      className="group relative flex flex-col p-5 rounded-xl border border-border bg-surface-2/50 card-hover"
-    >
-      {/* Page preview */}
-      <ProjectPreview image={project.image} title={project.title} link={project.link} />
+    <div className="group relative flex flex-col sm:flex-row gap-5 p-4 rounded-lg transition-all duration-300 hover:bg-surface/60 hover:shadow-lg -mx-4">
+      {/* Thumbnail */}
+      <ProjectImage image={project.image} title={project.title} link={project.link} />
 
-      {/* Live badge */}
-      {project.live && (
-        <div className="flex items-center gap-1.5 mb-3">
-          <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-          <span className="font-mono text-xs text-green-400 tracking-wider uppercase">Live</span>
+      {/* Content */}
+      <div className="flex flex-col">
+        <div className="flex items-center gap-2 mb-2">
+          {project.live && (
+            <span className="flex items-center gap-1 font-mono text-[10px] text-green-400 tracking-wider uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+              Live
+            </span>
+          )}
         </div>
-      )}
 
-      {/* Title row */}
-      <div className="flex items-start justify-between gap-3 mb-2">
-        <h3 className="font-display font-bold text-lg text-primary group-hover:text-accent transition-colors duration-200">
-          {project.title}
-        </h3>
-        {project.link && (
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="shrink-0 text-muted hover:text-accent transition-colors duration-200 mt-0.5"
-            aria-label={`Visit ${project.title}`}
-          >
-            <ExternalLinkIcon className="w-4 h-4" />
-          </a>
+        <div className="flex items-start gap-2 mb-2">
+          <h3 className="font-semibold text-primary group-hover:text-accent transition-colors duration-200 leading-tight">
+            {project.title}
+          </h3>
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 text-muted hover:text-accent transition-colors duration-200 mt-0.5"
+              aria-label={`Visit ${project.title}`}
+            >
+              <ExternalLinkIcon className="w-3.5 h-3.5" />
+            </a>
+          )}
+        </div>
+
+        <p className="text-muted text-sm leading-relaxed mb-4 flex-1">
+          {project.description}
+        </p>
+
+        {project.tech.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {project.tech.map(t => (
+              <span
+                key={t}
+                className="px-2.5 py-1 rounded font-mono text-xs bg-accent/10 text-accent border border-accent/20"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
         )}
       </div>
-
-      {/* Description */}
-      <p className="text-muted text-sm leading-relaxed mb-5 flex-1">
-        {project.description}
-      </p>
-
-      {/* Tech stack */}
-      {project.tech.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-auto">
-          {project.tech.map(t => (
-            <span
-              key={t}
-              className="px-2.5 py-1 rounded-md bg-accent/8 border border-accent/15 font-mono text-xs text-accent/70"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-      )}
-    </motion.div>
+    </div>
   )
 }

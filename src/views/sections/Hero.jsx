@@ -77,11 +77,6 @@ function CodeSnippet() {
               <span className="text-orange-400">4</span>
               <span className="text-muted">, // years</span>
             </div>
-            <div className="ml-5">
-              <span className="text-primary">available</span>
-              <span className="text-muted-2">: </span>
-              <span className="text-accent-2">true</span>
-            </div>
             <div><span className="text-primary">{'}'}</span></div>
           </div>
         </div>
