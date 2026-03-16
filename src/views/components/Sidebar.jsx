@@ -32,7 +32,7 @@ export default function Sidebar() {
 
         {/* Title */}
         <h2 className="text-lg font-medium text-primary/70 mb-5">
-          Full-Stack Software Developer
+          Software Developer
         </h2>
 
         {/* Bio excerpt */}
